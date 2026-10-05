@@ -108,6 +108,7 @@ dcensus = rows("census_datasets.csv")
 tools = rows("tooling.csv")
 web = rows("web_sources.csv")
 facts = rows("hosted_facts.csv")
+hosted_later = rows("hosted_later.csv")
 atlas = rows("atlas.csv")
 asrc = rows("atlas_sources.csv")
 patterns = rows("patterns.csv")
@@ -138,7 +139,7 @@ if bad:
 stream_codes = [s["code"] for s in meta["streams"]]
 genealogy = [p for p in papers if p["group"] in stream_codes]
 dataset_ids = {d["id"] for d in dcensus} | {d["id"] for d in dsets}
-hosted_n = 1
+hosted_n = 1 + len(hosted_later)
 github_only = [f for f in fams if not f["hf"]]
 n_papers = len(papers)
 n_models = hosted_n + len(t1) + len(github_only)
@@ -269,7 +270,7 @@ tc = Counter(t["category"] for t in tools)
 stat_lines = [
     f"- **📄 Registry-verified papers**: {n_papers}, of which {len(genealogy)} sit in the five genealogy streams "
     + ", ".join(f"{s['code']} {gc[s['code']]}" for s in meta["streams"]),
-    f"- **☁️ Hosted decision models**: {hosted_n} (Jev 1.13, TypeSafe AI)",
+    f"- **☁️ Hosted decision models**: {hosted_n} (Jev 1.13, TypeSafe AI" + "".join(f"; {h['name']}, {h['provider']}" for h in hosted_later) + ")",
     f"- **🔓 Open original implementations on Hugging Face (T1)**: " + (f"{len(t1)} checkpoints in {counts['hf.t1Families']} families, " if len(t1) == int(counts['hf.t1Count'])
          else f"{len(t1)} checkpoints ({counts['hf.t1Count']} in {counts['hf.t1Families']} families at the cutoff), ")
     + f"{counts['hf.t1.distinctBackboneFamilies']} backbone families, first releases {counts['hf.t1.releaseDateSpan']}",
@@ -338,7 +339,7 @@ for s in meta["streams"]:
 
 # ============================================================================= models
 A("## 🤖 Models\n")
-A("### ☁️ Hosted model\n")
+A("### ☁️ Hosted models\n")
 A("**Jev 1.13** from TypeSafe AI launched on 15 September 2026 with the post that introduced the System One name. "
   "Its weights, architecture and RLCD training recipe are not published, so statements about its internals rest on the "
   "vendor's own descriptions or on black-box probing. The facts below are the vendor's, as documented on the access date.\n")
@@ -347,6 +348,13 @@ vdocs = [w_ for w_ in web if w_["kind"] == "vendor documentation"]
 A(details(f"📘 <strong>Vendor documentation and access points</strong> ({len(vdocs)} pages)",
           md_table(["Page", "Publisher", "Page date", "Accessed"],
                    [[f"[{esc(d['title'])}]({d['url']})", esc(d["publisher"]), esc(d["page_date"]), d["accessed"]] for d in vdocs])) + "\n")
+if hosted_later:
+    A("**Added after the cutoff.** These hosted models appeared after 24 September 2026, so the survey's census does not "
+      "count them. Their entries record the publisher's documentation, and any measurement shown is the publisher's own until "
+      "an independent evaluation is listed in the evidence table.\n")
+    A(md_table(["Model", "Provider", "Released", "Contract", "Limits and price", "Evidence", "Disclosure"],
+               [[f"[{esc(h['name'])}]({h['card']}) · [API]({h['docs']})", esc(h["provider"]), h["released"], esc(h["contract"]),
+                 esc(h["limits"] + "; " + h["price"]), esc(h["evidence"]), esc(h["disclosure"])] for h in hosted_later]) + "\n")
 sdk = [t for t in tools if t["category"] in ("vendor_sdk",)]
 A("The official SDKs are " + ", ".join(f"[{t['name']}]({t['repo']})" for t in sdk[:-1])
   + f" and [{sdk[-1]['name']}]({sdk[-1]['repo']}).\n")

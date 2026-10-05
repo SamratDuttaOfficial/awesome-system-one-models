@@ -12,7 +12,7 @@
 [![GitHub stars](https://img.shields.io/github/stars/pozapas/awesome-system-one-models.svg?style=social&label=Star)](https://github.com/pozapas/awesome-system-one-models)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](CONTRIBUTING.md)
 [![Last Updated](https://img.shields.io/badge/Last%20Updated-September%202026-blue.svg?style=flat-square)](https://github.com/pozapas/awesome-system-one-models/commits/main)
-[![Resources](https://img.shields.io/badge/Resources-554-orange.svg?style=flat-square)](#-at-a-glance)
+[![Resources](https://img.shields.io/badge/Resources-555-orange.svg?style=flat-square)](#-at-a-glance)
 [![Version](https://img.shields.io/badge/version-v1.0%20%C2%B7%20cutoff%202026--09--24-6c3483.svg?style=flat-square)](#-cutoff-and-versioning)
 
 </div>
@@ -31,7 +31,7 @@ Maintained alongside &nbsp;<strong>System One Decision Models: A Survey from Cal
 
 ### 🎯 *"A decision model is a new contract, not a new kind of intelligence."*
 
-**214 registry-verified papers · 27 graded studies · 105 models · 54 datasets · 127 tools**  
+**214 registry-verified papers · 27 graded studies · 106 models · 54 datasets · 127 tools**  
 *Organized by the survey's own structure: genealogy, anatomy, census, evidence, failures, patterns and reporting*
 
 [🧩 Concept](#-what-is-a-system-one-model) • [🌳 Genealogy](#-genealogy) • [🤖 Models](#-models) • [🔬 Evidence](#-evidence) • [🧨 Failure atlas](#-failure-atlas) • [🧱 Patterns](#-design-patterns) • [🤝 Contribute](CONTRIBUTING.md) • [📝 Cite](#-how-to-cite)
@@ -98,7 +98,7 @@ graph TD
 <summary>📊 <strong>Repository statistics</strong> (click to expand)</summary>
 
 - **📄 Registry-verified papers**: 214, of which 166 sit in the five genealogy streams S1 36, S2 26, S3 51, S4 40, S5 13
-- **☁️ Hosted decision models**: 1 (Jev 1.13, TypeSafe AI)
+- **☁️ Hosted decision models**: 2 (Jev 1.13, TypeSafe AI; Trio-Spark v1.0, MachineFi)
 - **🔓 Open original implementations on Hugging Face (T1)**: 101 checkpoints in 67 families, 15 backbone families, first releases 2026-09-16 to 2026-09-24
 - **🧬 Derivatives (T2)**: 259 (format conversions 142, quantizations 9, language fine-tunes 10, domain fine-tunes 9, merges 4, other 85)
 - **📚 Datasets**: 54 typed-decision datasets on Hugging Face, 8 with a full card
@@ -383,7 +383,7 @@ The decision contract is best read as a convergence of five older research lines
 
 ## 🤖 Models
 
-### ☁️ Hosted model
+### ☁️ Hosted models
 
 **Jev 1.13** from TypeSafe AI launched on 15 September 2026 with the post that introduced the System One name. Its weights, architecture and RLCD training recipe are not published, so statements about its internals rest on the vendor's own descriptions or on black-box probing. The facts below are the vendor's, as documented on the access date.
 
@@ -426,6 +426,12 @@ The decision contract is best read as a convergence of five older research lines
 | [Jev 1.13 on OpenRouter (model page)](https://openrouter.ai/typesafe/jev-1.13) | OpenRouter | undated | 2026-09-24 |
 
 </details>
+
+**Added after the cutoff.** These hosted models appeared after 24 September 2026, so the survey's census does not count them. Their entries record the publisher's documentation, and any measurement shown is the publisher's own until an independent evaluation is listed in the evidence table.
+
+| Model | Provider | Released | Contract | Limits and price | Evidence | Disclosure |
+| --- | --- | --- | --- | --- | --- | --- |
+| [Trio-Spark v1.0](https://huggingface.co/MachineFi/Trio-Spark-v1.0) · [API](https://github.com/machinefi/trio-spark/blob/main/docs/api.md) | MachineFi | 2026-09-30 | One Choice question per request; returns the selected option, a probability for every option and a confidence, with no generated text; Noul and Score are offered as projections over Choice | 1,024 input tokens; 2 to 8 options; API model ID trio-spark-v1.0; 0.042 USD per million input tokens; output not metered | Vendor-reported only; the vendor states that its probabilities are not claimed to be calibrated for every workload. An independent JevBench evaluation is queued (fstandhartinger/jevbench#166) | Submitted by the publisher (issue #2) |
 
 The official SDKs are [system-one-adapter-python](https://github.com/typesafe-ai/system-one-adapter-python), [typesafe-sdk-js](https://github.com/typesafe-ai/typesafe-sdk-js) and [typesafe-sdk-python](https://github.com/typesafe-ai/typesafe-sdk-python).
 
