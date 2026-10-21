@@ -15,7 +15,7 @@
 
 ## 🌟 What belongs here
 
-This list accompanies the survey *From Calibrated Classifiers to Decision Contracts: A Survey of System One Models* (Rafe and Das, manuscript under review). It covers typed probabilistic decision models, meaning models that map a state and a caller-declared typed question (Choice, Score or Noul) to a probability distribution over a finite answer space without generating text, together with the research lines, datasets, tools and evidence around them.
+This list accompanies the survey *System One Decision Models: A Survey from Calibrated Classifiers to Decision Contracts* (Rafe and Das, manuscript in preparation). It covers typed probabilistic decision models, meaning models that map a state and a caller-declared typed question (Choice, Score or Noul) to a probability distribution over a finite answer space without generating text, together with the research lines, datasets, tools and evidence around them.
 
 The inclusion rules follow the survey's evidence protocol.
 
